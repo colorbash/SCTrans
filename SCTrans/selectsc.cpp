@@ -133,16 +133,16 @@ SelectSC::~SelectSC()
 		QMap<QString, SC_Par>::const_iterator sc_iter = sc_data.constBegin();
 		while(sc_iter != sc_data.constEnd())
 		{
-			txtStrm << ">" + sc_iter->nameSC.simplified()	<< "\n";
-			txtStrm << sc_iter->dX							<< "\n";
-			txtStrm << sc_iter->dY							<< "\n";
-			txtStrm << sc_iter->dZ							<< "\n";
-			txtStrm << sc_iter->m							<< "\n";
-			txtStrm << sc_iter->wX							<< "\n";
-			txtStrm << sc_iter->wY							<< "\n";
-			txtStrm << sc_iter->wZ							<< "\n";
-			txtStrm << QString::number(sc_iter->A,'g',10)	<< "\n";
-			txtStrm << sc_iter->compK						<< "\n";
+			txtStrm << ">" + sc_iter->nameSC.simplified()		<< "\n";
+			txtStrm << QString::number(sc_iter->dX	 ,'g',10)	<< "\n";
+			txtStrm << QString::number(sc_iter->dY	 ,'g',10)	<< "\n";
+			txtStrm << QString::number(sc_iter->dZ	 ,'g',10)	<< "\n";
+			txtStrm << QString::number(sc_iter->m	 ,'g',10)	<< "\n";
+			txtStrm << QString::number(sc_iter->wX	 ,'g',10)	<< "\n";
+			txtStrm << QString::number(sc_iter->wY	 ,'g',10)	<< "\n";
+			txtStrm << QString::number(sc_iter->wZ	 ,'g',10)	<< "\n";
+			txtStrm << QString::number(sc_iter->A	 ,'g',10)	<< "\n";
+			txtStrm << QString::number(sc_iter->compK,'g',10)	<< "\n";
 			txtStrm << "\n" ;
 			
 			++sc_iter;
@@ -239,31 +239,31 @@ void SelectSC::show_data()
 		item = new QStandardItem(sc_iter->nameSC);
 		model->setItem(i,0,item);
 
-		item = new QStandardItem(QString::number(sc_iter->dX,	'g',5));
+		item = new QStandardItem(QString::number(sc_iter->dX,	'g',10));
 		model->setItem(i,1,item);
 
-		item = new QStandardItem(QString::number(sc_iter->dY,	'g',5));
+		item = new QStandardItem(QString::number(sc_iter->dY,	'g',10));
 		model->setItem(i,2,item);
 
-		item = new QStandardItem(QString::number(sc_iter->dZ,	'g',5));
+		item = new QStandardItem(QString::number(sc_iter->dZ,	'g',10));
 		model->setItem(i,3,item);
 
-		item = new QStandardItem(QString::number(sc_iter->m,	'g',5));
+		item = new QStandardItem(QString::number(sc_iter->m,	'g',10));
 		model->setItem(i,4,item);
 
-		item = new QStandardItem(QString::number(sc_iter->wX,	'g',5));
+		item = new QStandardItem(QString::number(sc_iter->wX,	'g',10));
 		model->setItem(i,5,item);
 
-		item = new QStandardItem(QString::number(sc_iter->wY,	'g',5));
+		item = new QStandardItem(QString::number(sc_iter->wY,	'g',10));
 		model->setItem(i,6,item);
 
-		item = new QStandardItem(QString::number(sc_iter->wZ,	'g',5));
+		item = new QStandardItem(QString::number(sc_iter->wZ,	'g',10));
 		model->setItem(i,7,item);
 
 		item = new QStandardItem(QString::number(sc_iter->A,	'g',10));
 		model->setItem(i,8,item);
 
-		item = new QStandardItem(QString::number(sc_iter->compK,'g',5));
+		item = new QStandardItem(QString::number(sc_iter->compK,'g',10));
 		model->setItem(i,9,item);
 		++i;
 		++sc_iter;
@@ -334,6 +334,11 @@ void SelectSC::editSC()
 			QMessageBox::warning(this, "Ошибка", "Ошибка выбора СК!");
 			return;
 		}
+	}
+	else
+	{
+		QMessageBox::warning(this, "Ошибка.", "Выберите нужную СК!");
+		return;
 	}
 }
 //__________________________________________________________________________________________________________________

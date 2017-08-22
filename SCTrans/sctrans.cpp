@@ -7,22 +7,22 @@ SCTrans::SCTrans(QWidget *parent, Qt::WFlags flags)
 
 	anyAction = false;
 
-	ui.transf_pb	->setIcon(QIcon(QPixmap("arrow.png")));
+	ui.transf_pb	->setIcon(QIcon(QPixmap(":/Resources/arrow.png")));
 	ui.transf_pb	->setIconSize(QSize(50,50));
-	ui.back_pb		->setIcon(QIcon(QPixmap("back.png")));
+	ui.back_pb		->setIcon(QIcon(QPixmap(":/Resources/back.png")));
 	ui.back_pb		->setIconSize(QSize(20,20));
-	ui.forward_pb	->setIcon(QIcon(QPixmap("forward.png")));
+	ui.forward_pb	->setIcon(QIcon(QPixmap(":/Resources/forward.png")));
 	ui.forward_pb	->setIconSize(QSize(20,20));
 	ui.back_pb		->setEnabled(false);
 	ui.forward_pb	->setEnabled(false);
 
-	setInLabels (COORDS_TYPE_XYZ);
-	setOutLabels(COORDS_TYPE_XYZ);
+	setInLabels		(COORDS_TYPE_XYZ);
+	setOutLabels	(COORDS_TYPE_XYZ);
 
 	// for tests
-	ui.startSC_le1->setText("3000000.");
-	ui.startSC_le2->setText("3000000.");
-	ui.startSC_le3->setText("3000000.");
+	ui.startSC_le1	->setText("3000000.");
+	ui.startSC_le2	->setText("3000000.");
+	ui.startSC_le3	->setText("3000000.");
 	
 	ui.startSC_le1	->setValidator(selectSC_form.createSC_form.validator);
 	ui.startSC_le2	->setValidator(selectSC_form.createSC_form.validator);
@@ -31,35 +31,34 @@ SCTrans::SCTrans(QWidget *parent, Qt::WFlags flags)
 	ui.endSC_le2	->setValidator(selectSC_form.createSC_form.validator);
 	ui.endSC_le3	->setValidator(selectSC_form.createSC_form.validator);
 
-	connect(ui.endSC_input_cb,	SIGNAL(currentIndexChanged(int)), this, SLOT(setOutLabels(int)));
-	connect(ui.startSC_input_cb,SIGNAL(currentIndexChanged(int)), this, SLOT(setInLabels (int)));
-	connect(ui.setEndSC_pb,		SIGNAL(clicked				()) , this, SLOT(chooseEndSC  ()));
-	connect(ui.setStartSC_pb,	SIGNAL(clicked				()) , this, SLOT(chooseStartSC()));
-	connect(ui.transf_pb,		SIGNAL(clicked				()) , this, SLOT(transferSC_pb_checked()));
-	connect(ui.clear_pb,		SIGNAL(clicked				()) , this, SLOT(clearLE	()));
-	connect(ui.back_pb,			SIGNAL(clicked				()) , this, SLOT(turnBack	()));
-	connect(ui.forward_pb,		SIGNAL(clicked				()) , this, SLOT(turnFront	()));
-	connect(ui.settings_pb,		SIGNAL(clicked				())	, this,	SLOT(setSettings()));
+	connect(ui.endSC_input_cb,	SIGNAL(currentIndexChanged(int)), this, SLOT(setOutLabels			(int)));
+	connect(ui.startSC_input_cb,SIGNAL(currentIndexChanged(int)), this, SLOT(setInLabels			(int)));
+	connect(ui.setEndSC_pb,		SIGNAL(clicked				()) , this, SLOT(chooseEndSC			(	)));
+	connect(ui.setStartSC_pb,	SIGNAL(clicked				()) , this, SLOT(chooseStartSC			(	)));
+	connect(ui.transf_pb,		SIGNAL(clicked				()) , this, SLOT(transferSC_pb_checked	(	)));
+	connect(ui.clear_pb,		SIGNAL(clicked				()) , this, SLOT(clearLE				(	)));
+	connect(ui.back_pb,			SIGNAL(clicked				()) , this, SLOT(turnBack				(	)));
+	connect(ui.forward_pb,		SIGNAL(clicked				()) , this, SLOT(turnFront				(	)));
+	connect(ui.settings_pb,		SIGNAL(clicked				())	, this,	SLOT(setSettings			(	)));
 
-	connect(ui.startSC_le1,		SIGNAL(textChanged			()) , this, SLOT(hasAction	()));
-	connect(ui.startSC_le2,		SIGNAL(textChanged			()) , this, SLOT(hasAction	()));
-	connect(ui.startSC_le3,		SIGNAL(textChanged			()) , this, SLOT(hasAction	()));
-	connect(ui.startSC_le_name,	SIGNAL(textChanged			()) , this, SLOT(hasAction	()));
-	connect(ui.endSC_le_name,	SIGNAL(textChanged			()) , this, SLOT(hasAction	()));
+	connect(ui.startSC_le1,		SIGNAL(textChanged			()) , this, SLOT(hasAction				(	)));
+	connect(ui.startSC_le2,		SIGNAL(textChanged			()) , this, SLOT(hasAction				(	)));
+	connect(ui.startSC_le3,		SIGNAL(textChanged			()) , this, SLOT(hasAction				(	)));
+	connect(ui.startSC_le_name,	SIGNAL(textChanged			()) , this, SLOT(hasAction				(	)));
+	connect(ui.endSC_le_name,	SIGNAL(textChanged			()) , this, SLOT(hasAction				(	)));
 
-	ui.back_pb		->setToolTip("Возрват назад");
-	ui.forward_pb	->setToolTip("Вперед");
-	ui.transf_pb	->setToolTip("Переход");
-	ui.settings_pb	->setToolTip("Параметры");
-	ui.setEndSC_pb	->setToolTip("Задать конечную СК");
-	ui.setStartSC_pb->setToolTip("Задать начальную СК");
+	ui.back_pb		->setToolTip("Возрват назад"		);
+	ui.forward_pb	->setToolTip("Вперед"				);
+	ui.transf_pb	->setToolTip("Переход"				);
+	ui.settings_pb	->setToolTip("Параметры"			);
+	ui.setEndSC_pb	->setToolTip("Задать конечную СК"	);
+	ui.setStartSC_pb->setToolTip("Задать начальную СК"	);
+	ui.clear_pb		->setToolTip("Очистить поля данных"	);
+
+	settings_form.sign_after_dot = 6;
 }
 //______________________________________________________________________________________
-SCTrans::~SCTrans()
-{
-
-}
-
+SCTrans::~SCTrans(){}
 //______________________________________________________________________________________
 void SCTrans::setInLabels		(int _n)
 {
@@ -325,11 +324,26 @@ void SCTrans::transferSC_pb_checked()
 
 	// Возмем координаты
 	//________________________________________________________________________________________________________
-	QVD in_coords(3);
-	in_coords[0] = ui.startSC_le1->text().toDouble();
-	in_coords[1] = ui.startSC_le2->text().toDouble();
-	in_coords[2] = ui.startSC_le3->text().toDouble();
-
+	QVD		in_coords(3);
+	bool	flag;
+	in_coords[0] = ui.startSC_le1->text().toDouble(&flag);
+	if (!flag)
+	{
+		QMessageBox::warning(this, "Ошибка!", "Не правильно заданы координаты");
+		return;
+	}
+	in_coords[1] = ui.startSC_le2->text().toDouble(&flag);
+	if (!flag)
+	{
+		QMessageBox::warning(this, "Ошибка!", "Не правильно заданы координаты");
+		return;
+	}
+	in_coords[2] = ui.startSC_le3->text().toDouble(&flag);
+	if (!flag)
+	{
+		QMessageBox::warning(this, "Ошибка!", "Не правильно заданы координаты");
+		return;
+	}
 
 	// 1 преобразуем входные координаты к прямоугольным
 	//________________________________________________________________________________________________________
@@ -391,24 +405,20 @@ void SCTrans::transferSC_pb_checked()
 
 	// Запишем результат
 	//________________________________________________________________________________________________________
-	ui.endSC_le1->setText(QString::number(in_coords[0],'g', 15));
-	ui.endSC_le2->setText(QString::number(in_coords[1],'g', 15));
-	ui.endSC_le3->setText(QString::number(in_coords[2],'g', 15));
+	ui.endSC_le1->setText(getAccurStr(in_coords[0], settings_form.sign_after_dot));
+	ui.endSC_le2->setText(getAccurStr(in_coords[1], settings_form.sign_after_dot));
+	ui.endSC_le3->setText(getAccurStr(in_coords[2], settings_form.sign_after_dot));
 	//________________________________________________________________________________________________________
 
 	// История
 	//________________________________________________________________________________________________________
-	back_history << form_history();
+	back_history << formHistory();
 	if (back_history.size() > 100)
 		back_history.remove(0);
 	front_history	.clear();
 	ui.forward_pb	->setEnabled(false);
-	ui.back_pb		->setEnabled(true );
-
-	if (back_history.size() > 1)
-		anyAction = true;
-	else
-		anyAction = false;
+	if (back_history.size() >= 2)
+		ui.back_pb	->setEnabled(true );
 	//________________________________________________________________________________________________________
 }
 //________________________________________________________________________________________________________
@@ -416,6 +426,20 @@ QVD SCTrans::transfer2RefSC( SC_Par _pars, QVD _coords, bool _isDirect)
 {
 	QMD mW(3); 
 	QVD dXYZ, res(3);
+
+	// Смотрим на направление перехода
+	//________________________________________________________________
+	if (!_isDirect)
+	{
+		_pars.dX *= -1.;
+		_pars.dY *= -1.;
+		_pars.dZ *= -1.;
+		_pars.wX *= -1.;
+		_pars.wY *= -1.;
+		_pars.wZ *= -1.;
+		_pars.m  *= -1.;
+	}
+
 	// Углы
 	//________________________________________________________________
 	mW[0]	<< 1.							<< +_pars.wZ/3600000.*PI/180.	<< -_pars.wY/3600000.*PI/180.; // угл.мс -> рад
@@ -429,15 +453,6 @@ QVD SCTrans::transfer2RefSC( SC_Par _pars, QVD _coords, bool _isDirect)
 	// Масштабный коэф.
 	//________________________________________________________________
 	double m = 1 + _pars.m * 1e-6;
-
-	// Смотрим на направление перехода
-	//________________________________________________________________
-	if (!_isDirect)
-	{
-		dXYZ = V_x_C(dXYZ, -1.);
-		mW	 = M_x_C(mW  , -1.);
-		m	*= -1.;
-	}
 
 	// Перемножение
 	//________________________________________________________________
@@ -578,18 +593,17 @@ QVD SCTrans::toXYZ( QVD _coords )
 //______________________________________________________________________________________
 void SCTrans::clearLE()
 {
-	ui.endSC_le1		->setText("");
-	ui.endSC_le2		->setText("");
-	ui.endSC_le3		->setText("");
-	ui.startSC_le1		->setText("");
-	ui.startSC_le2		->setText("");
-	ui.startSC_le3		->setText("");
-	ui.endSC_le_name	->setText("");
-	ui.startSC_le_name	->setText("");
+	ui.endSC_le1			->setText("");
+	ui.endSC_le2			->setText("");
+	ui.endSC_le3			->setText("");
+	ui.startSC_le1			->setText("");
+	ui.startSC_le2			->setText("");
+	ui.startSC_le3			->setText("");
+	ui.endSC_le_name		->setText("");
+	ui.startSC_le_name		->setText("");
 }
-
 //______________________________________________________________________________________
-Op_History SCTrans::form_history()
+Op_History SCTrans::formHistory()
 {
 	Op_History his;
 
@@ -616,11 +630,11 @@ void SCTrans::turnBack()
 		ui.back_pb->setEnabled(false);
 		return;
 	}
-	go2history(back_history.last());
 	front_history << back_history.last();
-	ui.forward_pb->setEnabled(true);
 	back_history.remove(back_history.size()-1);
-	if (back_history.isEmpty())
+	go2history(back_history.last());
+	ui.forward_pb->setEnabled(true);
+	if (back_history.size() <= 1)
 		ui.back_pb->setEnabled(false);
 }
 //______________________________________________________________________________________
@@ -633,16 +647,23 @@ void SCTrans::turnFront()
 	}
 	go2history(front_history.last());
 	back_history << front_history.last();
-	ui.back_pb->setEnabled(true);
 	front_history.remove(front_history.size()-1);
+	ui.back_pb->setEnabled(true);
 	if (front_history.isEmpty())
 		ui.forward_pb->setEnabled(false);
 }
 //______________________________________________________________________________________
 void SCTrans::go2history( Op_History _his )
 {
-	cur_Type_In_Coord	= cur_Type_In_Coord;
-	cur_Type_Out_Coord	= cur_Type_Out_Coord;
+	settings_form.linearInd = _his.linearInd;
+	settings_form.angleInd  = _his.angleInd;
+	cur_Type_In_Coord		= _his.cur_Type_In_Coord;
+	cur_Type_Out_Coord		= _his.cur_Type_Out_Coord;
+	setInLabels				(cur_Type_In_Coord );
+	setOutLabels			(cur_Type_Out_Coord);
+	ui.endSC_input_cb		->setCurrentIndex(cur_Type_Out_Coord);
+	ui.startSC_input_cb		->setCurrentIndex(cur_Type_In_Coord );
+
 	ui.startSC_le1			->setText(_his.inLE_1	);
 	ui.startSC_le2			->setText(_his.inLE_2	);
 	ui.startSC_le3			->setText(_his.inLE_3	);
@@ -651,26 +672,30 @@ void SCTrans::go2history( Op_History _his )
 	ui.endSC_le3			->setText(_his.outLE_3	);
 	ui.startSC_le_name		->setText(_his.inSCname	);
 	ui.endSC_le_name		->setText(_his.outSCname);
-	settings_form.linearInd = _his.linearInd;
-	settings_form.angleInd  = _his.angleInd;
 }
-
+//______________________________________________________________________________________
 void SCTrans::hasAction()
 {
-	anyAction = true;
+	if (!anyAction)
+	{
+		anyAction = true;
+		if (back_history.size() >= 2)
+			ui.back_pb->setEnabled(true);
+	}
 }
-
+//______________________________________________________________________________________
 void SCTrans::setSettings()
 {
+	settings_form.set_sign_dot();
 	if (settings_form.exec() == QDialog::Accepted)
 	{
 		setInLabels (ui.startSC_input_cb->currentIndex());
-		setOutLabels(ui.endSC_input_cb->currentIndex());
+		setOutLabels(ui.endSC_input_cb  ->currentIndex());
+		front_history.clear();
+		ui.forward_pb->setEnabled(false);
 	}
 }
-
 //______________________________________________________________________________________
-
 // Перевод из ГСК в геодезическую и обратно
 //______________________________________________________________________________________
 void XYZ_2_BLH					(	
@@ -685,76 +710,66 @@ void XYZ_2_BLH					(
 	if (_isDirect)
 	{
 		//_____________________________________________________________
-		double B = 0, L = 0, H = 0;
-		double e1 = sqrt((2*_F+_F*_F));
-		double r  = sqrt(_xyz[0]*_xyz[0]+_xyz[1]*_xyz[1]);
-
-		if (r==0)
+		dreal B  = 0.0L, L = 0.0L, H = 0.0L;
+		dreal e2 = (2.0L*(dreal)_F - (dreal)_F*(dreal)_F);
+		dreal r  = sqrtl(_xyz[0]*_xyz[0]+_xyz[1]*_xyz[1]);
+		//________________________________________________
+		if (fabsl(r) < 1e-12L) // r = 0
 		{
-			B = PI*_xyz[2]/2./qAbs(_xyz[2]);
-			L = 0;
-			H = _xyz[2]*sin(B) - _A*sqrt(1 - e1*e1*sin(B)*sin(B));
+			B = PI*_xyz[2] / (2.0L*fabsl(_xyz[2]));
+			L = 0.0L;
+			H = _xyz[2]*sinl(B) - ((dreal)_A)*sqrtl(1 - e2*sinl(B)*sinl(B));
 		}
 		else
 		{
-			if (r>0)
+			//____________________________________________
+			if (r > 0.0L)
 			{
-				double L0 = qAbs(asin(_xyz[1]/r));
-				if (_xyz[1] < 0 && _xyz[0] > 0)
-				{
-					L= 2*PI-L0;
-				}
-				if (_xyz[1] < 0 && _xyz[0] < 0)
-				{
-					L = PI+L0;
-				}
-				if (_xyz[1] > 0 && _xyz[0] < 0)
-				{
-					L = PI-L0;
-				}
-				if (_xyz[1] > 0 && _xyz[0] > 0)
-				{
-					L = L0;
-				}
+				dreal L0 = fabsl(asinl((dreal)_xyz[1] / r));
+				if (_xyz[1] < 0 && _xyz[0] > 0)		L = 2*PI - L0;
+				if (_xyz[1] < 0 && _xyz[0] < 0)		L = PI + L0;
+				if (_xyz[1] > 0 && _xyz[0] < 0)		L = PI - L0;
+				if (_xyz[1] > 0 && _xyz[0] > 0)		L = L0;	
 			}
-			if (_xyz[2] == 0)
+			//____________________________________________
+			if (fabsl((dreal)_xyz[2]) < 1e-12L)	// Z = 0
 			{
-				B = 0;
-				H = r - _A;
+				B = 0.0L;
+				H = r - (dreal)_A;
 			}
 			else
 			{
-				double R = sqrt(_xyz[0]*_xyz[0]+_xyz[1]*_xyz[1]+_xyz[2]*_xyz[2]);
-				double c = asin(_xyz[2]/R);
-				double p = e1*e1*_A/2./R;
-				double s1 = 0, s2 = 0, b;
+				dreal ro	= sqrtl((dreal)(_xyz[0]*_xyz[0] + _xyz[1]*_xyz[1] + _xyz[2]*_xyz[2]));
+				dreal c		= asinl(((dreal)_xyz[2]) / ro);
+				dreal p		= e2 * ((dreal)_A) / (2.0L * ro);
+				dreal s1	= 1.0L, s2 = 0.0L, b;
 
-				do 
+				while (fabsl(s1 - s2) >= 1E-12L) 
 				{
-					s1 = s2;
-					b = c + s1;
-					s2 = asin(p*sin(2*b)/sqrt(1-e1*e1*sin(b)*sin(b)));
-				} while (qAbs(s1-s2)>1E-9);
+					s1	= s2;
+					b	= c + s1;
+					s2	= asinl(p * sinl(2.0L * b) / sqrtl(1.0L - e2 * sinl(b)*sinl(b)));
+				} 
 
 				B = b;
-				H = r*cos(B) + _xyz[2]*sin(B) - _A*sqrt(1 - e1*e1*sin(B)*sin(B));
+				H = r*cosl(B) + ((dreal)_xyz[2])*sinl(B) - ((dreal)_A)*sqrtl(1.0L - e2*sinl(B)*sinl(B));
 			}
+			//____________________________________________
 		}
-		_blh[0] = B;
-		_blh[1] = L;
-		_blh[2] = H;
+		_blh[0] = (double) B;
+		_blh[1] = (double) L;
+		_blh[2] = (double) H;
 	}
 	//_____________________________________________________________
 	else
 	//_____________________________________________________________
 	{
-		double e1 = sqrt((2*_F+_F*_F));
-		double N  = _A / sqrt(1 - e1*e1 * sin(_blh[0])*sin(_blh[0]));
+		dreal e2	= (2.0L*(dreal)_F - (dreal)_F*(dreal)_F);
+		dreal N		= ((dreal)_A) / sqrtl(1 - e2 * sinl(_blh[0])*sinl(_blh[0]));
 
-		_xyz[0] = (N + _blh[2]) * cos(_blh[0]) * cos(_blh[1]);	// X
-		_xyz[1] = (N + _blh[2]) * cos(_blh[0]) * sin(_blh[1]);	// Y
-		_xyz[2] = ((1 - e1*e1) * N + _blh[2])  * sin(_blh[0]); 	// Z
-
+		_xyz[0]		= (N + _blh[2]) * cosl(_blh[0]) * cosl(_blh[1]);	// X
+		_xyz[1]		= (N + _blh[2]) * cosl(_blh[0]) * sinl(_blh[1]);	// Y
+		_xyz[2]		= ((1 - e2)		* N +  _blh[2]) * sinl(_blh[0]); 	// Z
 	}
 	//_____________________________________________________________
 }
@@ -769,8 +784,8 @@ void XYZ_2_RFL( QVD &_xyz, QVD &_rfl, bool _isDirect )
 		_rfl.clear();
 		_rfl.resize(3);
 		_rfl[0] = sqrt(_xyz[0]*_xyz[0] + _xyz[1]*_xyz[1] + _xyz[2]*_xyz[2]);
-		_rfl[1] = asin(_xyz[1] / sqrt(_xyz[0]*_xyz[0] + _xyz[1]*_xyz[1]));
-		_rfl[2] = asin(_xyz[2] / sqrt(_xyz[0]*_xyz[0] + _xyz[1]*_xyz[1] + _xyz[2]*_xyz[2]));
+		_rfl[1] = asin(_xyz[2] / sqrt(_xyz[0]*_xyz[0] + _xyz[1]*_xyz[1] + _xyz[2]*_xyz[2]));
+		_rfl[2] = asin(_xyz[1] / sqrt(_xyz[0]*_xyz[0] + _xyz[1]*_xyz[1]));
 	}
 	//_____________________________________________________________
 	else
@@ -786,20 +801,19 @@ void XYZ_2_RFL( QVD &_xyz, QVD &_rfl, bool _isDirect )
 	}
 	//_____________________________________________________________
 }
-
 //______________________________________________________________________________________
 QMD transpose	(QMD m)
 {
 	QMD res(m[0].size());
-
 	for (int i=0;i<m[0].size();++i)//transpose
-	{
 		for (int j=0;j<m.size();j++)
-		{
 			res[i].push_back(m[j][i]);
-		}
-	}
-
 	return res;
 }
+
+QString getAccurStr( double _val, int _sign )
+{
+	return QString::number(_val, 'g', log10(_val) + _sign + 1);
+}
+
 //______________________________________________________________________________________

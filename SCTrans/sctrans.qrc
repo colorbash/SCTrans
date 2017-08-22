@@ -1,4 +1,7 @@
 <RCC>
-    <qresource prefix="SCTrans">
+    <qresource prefix="/">
+      <file>Resources/arrow.png</file>
+      <file>Resources/back.png</file>
+      <file>Resources/forward.png</file>
     </qresource>
 </RCC>

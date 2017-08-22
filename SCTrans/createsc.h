@@ -31,14 +31,14 @@ public:
 	SC_Par					new_SC;			// Данные 
 	bool					isAddMode;		// Добавить/Изменить
 
-	void setSCPar  (SC_Par *_pars);
-	void setAddMode();
-	bool isSuccess ();
+	void setSCPar  (SC_Par *_pars);			// Изменение СК
+	void setAddMode();						// Добавление СК
+	bool isSuccess ();						// Проверка
 private:
 	Ui::CreateSC ui;
 	bool				isSuccessFlag;
 private slots:
-	void add_SC	  ();
+	void add_SC	  ();						// Нажали кнопку
 };
 //______________________________________________________________________________________________
 #endif // CREATESC_H

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'createsc.ui'
 **
-** Created: Tue 15. Aug 10:50:08 2017
+** Created: Tue 22. Aug 17:01:34 2017
 **      by: Qt User Interface Compiler version 4.8.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

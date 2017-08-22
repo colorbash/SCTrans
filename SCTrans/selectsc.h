@@ -4,7 +4,6 @@
 #include <QDialog>
 #include "ui_selectsc.h"
 #include "createsc.h"
-#include <QValidator>
 #include <QDebug>
 #include <stdio.h>
 #include <iostream>
@@ -12,8 +11,6 @@
 #include "QStandardItem"
 #include <QFile>
 #include <QTextStream>
-//#include "sqlite3.h"
-//#include <QSqlDatabase>
 
 #define FNAME		"sc_data.txt"
 //______________________________________________________________________________________________
@@ -33,8 +30,6 @@ public:
 	SelectSC(QWidget *parent = 0);
 	~SelectSC();
 	//_____________________________________________________
-	//QSqlDatabase				sc_db;
-	
 	QMap<QString, SC_Par>		sc_data;					// Готовые ск
 
 	SC_Par						inSC, outSC;				// Стартовая и конечная СК	
@@ -45,7 +40,7 @@ public:
 	
 	void show_data				();							// Table refresh
 
-	int  read_data				();							// Read from file
+	int	 read_data				();							// Read from file
 	//_____________________________________________________
 private slots:
 	void setSC					();							// Выбор СК

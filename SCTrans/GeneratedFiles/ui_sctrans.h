@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'sctrans.ui'
 **
-** Created: Tue 15. Aug 10:50:08 2017
+** Created: Tue 22. Aug 17:01:33 2017
 **      by: Qt User Interface Compiler version 4.8.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -47,12 +47,15 @@ public:
     QComboBox *startSC_input_cb;
     QHBoxLayout *horizontalLayout;
     QLabel *startSC_lb1;
+    QSpacerItem *horizontalSpacer_3;
     QLineEdit *startSC_le1;
     QHBoxLayout *horizontalLayout_2;
     QLabel *startSC_lb2;
+    QSpacerItem *horizontalSpacer_4;
     QLineEdit *startSC_le2;
     QHBoxLayout *horizontalLayout_3;
     QLabel *startSC_lb3;
+    QSpacerItem *horizontalSpacer_5;
     QLineEdit *startSC_le3;
     QVBoxLayout *verticalLayout_2;
     QSpacerItem *verticalSpacer_4;
@@ -75,12 +78,15 @@ public:
     QComboBox *endSC_input_cb;
     QHBoxLayout *horizontalLayout_4;
     QLabel *endSC_lb1;
+    QSpacerItem *horizontalSpacer_6;
     QLineEdit *endSC_le1;
     QHBoxLayout *horizontalLayout_5;
     QLabel *endSC_lb2;
+    QSpacerItem *horizontalSpacer_7;
     QLineEdit *endSC_le2;
     QHBoxLayout *horizontalLayout_6;
     QLabel *endSC_lb3;
+    QSpacerItem *horizontalSpacer_8;
     QLineEdit *endSC_le3;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
@@ -90,7 +96,7 @@ public:
     {
         if (SCTransClass->objectName().isEmpty())
             SCTransClass->setObjectName(QString::fromUtf8("SCTransClass"));
-        SCTransClass->resize(684, 338);
+        SCTransClass->resize(633, 243);
         centralWidget = new QWidget(SCTransClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         horizontalLayout_12 = new QHBoxLayout(centralWidget);
@@ -140,6 +146,10 @@ public:
 
         horizontalLayout->addWidget(startSC_lb1);
 
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_3);
+
         startSC_le1 = new QLineEdit(groupBox);
         startSC_le1->setObjectName(QString::fromUtf8("startSC_le1"));
 
@@ -156,6 +166,10 @@ public:
 
         horizontalLayout_2->addWidget(startSC_lb2);
 
+        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer_4);
+
         startSC_le2 = new QLineEdit(groupBox);
         startSC_le2->setObjectName(QString::fromUtf8("startSC_le2"));
 
@@ -171,6 +185,10 @@ public:
         startSC_lb3->setObjectName(QString::fromUtf8("startSC_lb3"));
 
         horizontalLayout_3->addWidget(startSC_lb3);
+
+        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_3->addItem(horizontalSpacer_5);
 
         startSC_le3 = new QLineEdit(groupBox);
         startSC_le3->setObjectName(QString::fromUtf8("startSC_le3"));
@@ -285,6 +303,10 @@ public:
 
         horizontalLayout_4->addWidget(endSC_lb1);
 
+        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_4->addItem(horizontalSpacer_6);
+
         endSC_le1 = new QLineEdit(groupBox_2);
         endSC_le1->setObjectName(QString::fromUtf8("endSC_le1"));
         endSC_le1->setReadOnly(true);
@@ -302,6 +324,10 @@ public:
 
         horizontalLayout_5->addWidget(endSC_lb2);
 
+        horizontalSpacer_7 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_5->addItem(horizontalSpacer_7);
+
         endSC_le2 = new QLineEdit(groupBox_2);
         endSC_le2->setObjectName(QString::fromUtf8("endSC_le2"));
         endSC_le2->setReadOnly(true);
@@ -318,6 +344,10 @@ public:
         endSC_lb3->setObjectName(QString::fromUtf8("endSC_lb3"));
 
         horizontalLayout_6->addWidget(endSC_lb3);
+
+        horizontalSpacer_8 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_6->addItem(horizontalSpacer_8);
 
         endSC_le3 = new QLineEdit(groupBox_2);
         endSC_le3->setObjectName(QString::fromUtf8("endSC_le3"));
@@ -340,7 +370,7 @@ public:
         SCTransClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(SCTransClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 684, 31));
+        menuBar->setGeometry(QRect(0, 0, 633, 21));
         SCTransClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(SCTransClass);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -361,9 +391,9 @@ public:
         setStartSC_pb->setText(QApplication::translate("SCTransClass", "\320\227\320\260\320\264\320\260\321\202\321\214", 0, QApplication::UnicodeUTF8));
         startSC_input_cb->clear();
         startSC_input_cb->insertItems(0, QStringList()
-         << QApplication::translate("SCTransClass", "X, Y, Z", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("SCTransClass", "B, L, H", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("SCTransClass", "R, F, L", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("SCTransClass", "X, Y, Z (\320\237\321\200\321\217\320\274\320\276\321\203\320\263\320\276\320\273\321\214\320\275\321\213\320\265 \320\272\320\276\320\276\321\200\320\264.)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("SCTransClass", "B, L, H (\320\223\320\265\320\276\320\264\320\265\320\267\320\270\321\207\320\265\321\201\320\272\320\270\320\265 \320\272\320\276\320\276\321\200\320\264.)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("SCTransClass", "R, F, L (\320\241\321\204\320\265\321\200\320\270\321\207\320\265\321\201\320\272\320\270\320\265 \320\272\320\276\320\276\321\200\320\264.)", 0, QApplication::UnicodeUTF8)
         );
         startSC_lb1->setText(QApplication::translate("SCTransClass", "TextLabel", 0, QApplication::UnicodeUTF8));
         startSC_lb2->setText(QApplication::translate("SCTransClass", "TextLabel", 0, QApplication::UnicodeUTF8));
@@ -377,9 +407,9 @@ public:
         setEndSC_pb->setText(QApplication::translate("SCTransClass", "\320\227\320\260\320\264\320\260\321\202\321\214", 0, QApplication::UnicodeUTF8));
         endSC_input_cb->clear();
         endSC_input_cb->insertItems(0, QStringList()
-         << QApplication::translate("SCTransClass", "X, Y, Z", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("SCTransClass", "B, L, H", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("SCTransClass", "R, F, L", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("SCTransClass", "X, Y, Z (\320\237\321\200\321\217\320\274\320\276\321\203\320\263\320\276\320\273\321\214\320\275\321\213\320\265 \320\272\320\276\320\276\321\200\320\264.)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("SCTransClass", "B, L, H (\320\223\320\265\320\276\320\264\320\265\320\267\320\270\321\207\320\265\321\201\320\272\320\270\320\265 \320\272\320\276\320\276\321\200\320\264.)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("SCTransClass", "R, F, L (\320\241\321\204\320\265\321\200\320\270\321\207\320\265\321\201\320\272\320\270\320\265 \320\272\320\276\320\276\321\200\320\264.)", 0, QApplication::UnicodeUTF8)
         );
         endSC_lb1->setText(QApplication::translate("SCTransClass", "TextLabel", 0, QApplication::UnicodeUTF8));
         endSC_lb2->setText(QApplication::translate("SCTransClass", "TextLabel", 0, QApplication::UnicodeUTF8));

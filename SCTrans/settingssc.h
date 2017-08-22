@@ -19,16 +19,20 @@ class SettingsSC : public QDialog
 	Q_OBJECT
 
 public:
-	SettingsSC(QWidget *parent = 0);
+	 SettingsSC(QWidget *parent = 0);
 	~SettingsSC();
 
-	int linearInd;
-	int angleInd;
+	int linearInd;		// Метры / КМ
+	int angleInd;		// Градусы / радианы
+	int	sign_after_dot;	// Знаки после запятой
+	
+	void set_sign_dot();
 
 private slots:
-	void ok_pushed();
+	void ok_pushed();	// Нажали ок
 
 private:
+	QIntValidator *intValid;
 	Ui::SettingsSC ui;
 };
 //____________________________________________________________________
